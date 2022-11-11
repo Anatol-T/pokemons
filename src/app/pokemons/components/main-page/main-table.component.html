@@ -1,0 +1,27 @@
+<div class= 'container min-h-screen bg-gray-300 mx-auto'
+>
+  <div *ngIf='pokemonsData$ | async as pokemonsData'
+  class='flex flex-row flex-wrap gap-2 justify-between'>
+    <div *ngFor='let pokemon of pokemonsData.pokemonsChunk'
+    class='basis-60 bg-amber-200'>
+      <h6>{{pokemon.name | titlecase}}</h6>
+      <img
+        [src]='pokemon.sprites.other["official-artwork"].front_default'
+        [alt]="pokemon.name"
+      >
+      <p>
+        Types:
+        <span *ngFor="let type of pokemon.types; let isLast = last">
+                  {{type.type.name}}{{!isLast ? ", " : ""}}
+                </span>
+      </p>
+      <button [routerLink]="['/info', pokemon.name]">
+        Info
+      </button>
+<!--      <button (click)='infoHandler(pokemon.name)'>-->
+<!--        Info-->
+<!--      </button>-->
+    </div>
+  </div>
+</div>
+
